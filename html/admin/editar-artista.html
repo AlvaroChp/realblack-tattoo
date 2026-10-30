@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar artista | Administración</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../../index.html"><h1>REALBLACK TATTOO</h1></a>
+        <a href="artistas.html">Volver a artistas</a>
+    </header>
+
+    <main>
+        <h2>Crear o editar artista</h2>
+
+        <form action="artistas.html" method="get">
+            <p>
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" required>
+            </p>
+
+            <p>
+                <label for="descripcion">Presentación:</label><br>
+                <textarea id="descripcion" name="descripcion" rows="5"></textarea>
+            </p>
+
+            <p>
+                <label for="especialidad">Especialidades:</label><br>
+                <input type="text" id="especialidad" name="especialidad">
+            </p>
+
+            <p>
+                <label for="foto">Fotografía:</label><br>
+                <input type="file" id="foto" name="foto" accept="image/*">
+            </p>
+
+            <button type="submit">Guardar</button>
+        </form>
+
+        <p>El formulario todavía no guarda cambios.</p>
+    </main>
+</body>
+</html>

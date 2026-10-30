@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crear usuario | Administración</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../../index.html"><h1>REALBLACK TATTOO</h1></a>
+        <a href="usuarios.html">Volver a usuarios</a>
+    </header>
+
+    <main>
+        <h2>Crear usuario</h2>
+
+        <form action="usuarios.html" method="get">
+            <p>
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" required>
+            </p>
+
+            <p>
+                <label for="email">Correo electrónico:</label><br>
+                <input type="email" id="email" name="email" required>
+            </p>
+
+            <p>
+                <label for="rol">Rol:</label><br>
+                <select id="rol" name="rol" required>
+                    <option value="">Selecciona un rol</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="secretaria">Secretaría</option>
+                    <option value="tatuador">Tatuador</option>
+                </select>
+            </p>
+
+            <button type="submit">Guardar usuario</button>
+        </form>
+
+        <p>La creación de cuentas y la asignación real de permisos se implementarán en el backend.</p>
+    </main>
+</body>
+</html>

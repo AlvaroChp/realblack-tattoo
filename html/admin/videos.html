@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestionar vídeos | Administración</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../../index.html"><h1>REALBLACK TATTOO</h1></a>
+        <nav>
+            <a href="panel.html">Panel</a>
+            <a href="portfolio.html">Portfolio</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Gestionar vídeos</h2>
+        <p>Desde esta sección se podrán gestionar los vídeos que se publiquen en la web.</p>
+
+        <form action="videos.html" method="get">
+            <p>
+                <label for="titulo">Título del vídeo:</label><br>
+                <input type="text" id="titulo" name="titulo" required>
+            </p>
+
+            <p>
+                <label for="video">Seleccionar vídeo:</label><br>
+                <input type="file" id="video" name="video" accept="video/*">
+            </p>
+
+            <button type="submit">Añadir vídeo</button>
+        </form>
+
+        <p>La subida y el almacenamiento de vídeos se implementarán posteriormente.</p>
+    </main>
+
+    <footer>
+        <a href="panel.html">Volver al panel</a>
+    </footer>
+</body>
+</html>

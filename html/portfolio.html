@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio | RealBlack Tattoo</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html"><h1>REALBLACK TATTOO</h1></a>
+
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="artistas.html">Artistas</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="solicitar-cita.html">Reservar cita</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Portfolio</h2>
+        <p>Descubre algunos de los trabajos realizados en RealBlack Tattoo.</p>
+
+        <section>
+            <h3>Filtrar por artista</h3>
+
+            <form action="portfolio.html" method="get">
+                <label for="artista">Selecciona un artista:</label>
+
+                <select id="artista" name="artista">
+                    <option value="">Todos los artistas</option>
+                    <option value="nick">Nick</option>
+                    <option value="alba">Alba</option>
+                    <option value="alex">Alex</option>
+                    <option value="zaira">Zaira</option>
+                    <option value="carla">Carla</option>
+                    <option value="gaby">Gaby</option>
+                </select>
+
+                <button type="submit">Filtrar</button>
+            </form>
+        </section>
+
+        <section>
+            <h3>Trabajos</h3>
+
+            <article>
+                <h4>Trabajo de ejemplo 1</h4>
+                <p>Aquí aparecerá la fotografía del tatuaje y su descripción.</p>
+                <p>Artista: <a href="nick.html">Nick</a></p>
+            </article>
+
+            <article>
+                <h4>Trabajo de ejemplo 2</h4>
+                <p>Aquí aparecerá la fotografía del tatuaje y su descripción.</p>
+                <p>Artista: <a href="artista.html?nombre=Alba">Alba</a></p>
+            </article>
+
+            <article>
+                <h4>Trabajo de ejemplo 3</h4>
+                <p>Aquí aparecerá la fotografía del tatuaje y su descripción.</p>
+                <p>Artista: <a href="artista.html?nombre=Carla">Carla</a></p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; RealBlack Tattoo</p>
+        <a href="../index.html">Volver al inicio</a>
+    </footer>
+</body>
+</html>

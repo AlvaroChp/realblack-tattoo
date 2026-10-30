@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asignar cita | Administración</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../../index.html"><h1>REALBLACK TATTOO</h1></a>
+        <nav>
+            <a href="panel.html">Panel</a>
+            <a href="solicitudes.html">Solicitudes</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Asignar cita</h2>
+        <p>Selecciona el artista y acuerda la fecha y hora con el cliente.</p>
+
+        <form action="citas.html" method="get">
+            <p>
+                <label for="artista">Tatuador:</label><br>
+                <select id="artista" name="artista" required>
+                    <option value="">Selecciona un artista</option>
+                    <option value="Nick">Nick</option>
+                    <option value="Alba">Alba</option>
+                    <option value="Alex">Alex</option>
+                    <option value="Zaira">Zaira</option>
+                    <option value="Carla">Carla</option>
+                    <option value="Gaby">Gaby</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="fecha">Fecha acordada:</label><br>
+                <input type="date" id="fecha" name="fecha" required>
+            </p>
+
+            <p>
+                <label for="hora">Hora acordada:</label><br>
+                <input type="time" id="hora" name="hora" required>
+            </p>
+
+            <p>
+                <label for="observaciones">Observaciones:</label><br>
+                <textarea id="observaciones" name="observaciones" rows="4"></textarea>
+            </p>
+
+            <button type="submit">Guardar asignación</button>
+        </form>
+
+        <p>La asignación todavía no se guarda en una base de datos.</p>
+    </main>
+
+    <footer>
+        <a href="solicitudes.html">Volver a solicitudes</a>
+    </footer>
+</body>
+</html>

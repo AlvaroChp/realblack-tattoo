@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar trabajo | Administración</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../../index.html"><h1>REALBLACK TATTOO</h1></a>
+        <a href="portfolio.html">Volver al portfolio</a>
+    </header>
+
+    <main>
+        <h2>Añadir trabajo al portfolio</h2>
+
+        <form action="portfolio.html" method="get">
+            <p>
+                <label for="titulo">Título:</label><br>
+                <input type="text" id="titulo" name="titulo" required>
+            </p>
+
+            <p>
+                <label for="descripcion">Descripción:</label><br>
+                <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+            </p>
+
+            <p>
+                <label for="artista">Artista:</label><br>
+                <select id="artista" name="artista">
+                    <option value="">Selecciona un artista</option>
+                    <option>Nick</option>
+                    <option>Alba</option>
+                    <option>Alex</option>
+                    <option>Zaira</option>
+                    <option>Carla</option>
+                    <option>Gaby</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="imagen">Imagen del trabajo:</label><br>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+            </p>
+
+            <button type="submit">Guardar trabajo</button>
+        </form>
+    </main>
+</body>
+</html>
