@@ -1,0 +1,41 @@
+<main>
+  <h2>Resumen</h2>
+  <p>
+    Hola, {{ auth.user()?.username }}. Tu rol es
+    <strong>{{ auth.user()?.role }}</strong
+    >@if (auth.isAdmin()) {
+      : puedes gestionar todo el contenido del sitio.
+    } @else {
+      : puedes gestionar solicitudes y citas.
+    }
+  </p>
+
+  <section>
+    <h3>Solicitudes pendientes</h3>
+    <p>Solicitudes recibidas: {{ (requests() | async)?.length ?? 0 }}</p>
+    <a routerLink="/admin/solicitudes">Gestionar solicitudes</a>
+  </section>
+
+  <section>
+    <h3>Citas</h3>
+    <p>Citas registradas: {{ (appointments() | async)?.length ?? 0 }}</p>
+    <a routerLink="/admin/citas">Gestionar citas</a>
+  </section>
+
+  @if (auth.isAdmin()) {
+    <section>
+      <h3>Contenido de la web</h3>
+      <ul>
+        <li><a routerLink="/admin/artistas">Gestionar artistas</a></li>
+        <li><a routerLink="/admin/portfolio">Gestionar portfolio</a></li>
+        <li><a routerLink="/admin/videos">Gestionar vídeos</a></li>
+        <li><a routerLink="/admin/blog">Gestionar blog</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Usuarios</h3>
+      <a routerLink="/admin/usuarios">Gestionar usuarios y permisos</a>
+    </section>
+  }
+</main>

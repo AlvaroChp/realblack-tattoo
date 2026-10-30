@@ -1,0 +1,81 @@
+<main>
+  <h2>Solicitar cita</h2>
+
+  <p>
+    Cuéntanos qué tatuaje tienes en mente. Revisaremos tu solicitud
+    y nos pondremos en contacto contigo para concretar la cita.
+  </p>
+
+  <form (ngSubmit)="send()">
+    <fieldset>
+      <legend>Datos de contacto</legend>
+
+      <div>
+        <label for="nombre">Nombre y apellidos:</label>
+        <input type="text" id="nombre" name="nombre" autocomplete="name" [(ngModel)]="model.name" required>
+      </div>
+
+      <div>
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" autocomplete="email" [(ngModel)]="model.email" required>
+      </div>
+
+      <div>
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" autocomplete="tel" [(ngModel)]="model.phone" required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Información del tatuaje</legend>
+
+      <div>
+        <label for="artista">Artista preferido (opcional):</label>
+        <select id="artista" name="artista" [(ngModel)]="model.artistId">
+          <option value="">Sin preferencia</option>
+          @for (artist of artists(); track artist.id) {
+            <option [value]="artist.id">{{ artist.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label for="estilo">Estilo de tatuaje:</label>
+        <input type="text" id="estilo" name="estilo" [(ngModel)]="model.style" required>
+      </div>
+
+      <div>
+        <label for="zona">Zona del cuerpo:</label>
+        <input type="text" id="zona" name="zona" [(ngModel)]="model.bodyPart" required>
+      </div>
+
+      <div>
+        <label for="tamano">Tamaño aproximado:</label>
+        <input type="text" id="tamano" name="tamano" placeholder="Ejemplo: 10 x 8 cm" [(ngModel)]="model.size" required>
+      </div>
+
+      <div>
+        <label for="idea">Describe tu idea:</label>
+        <textarea id="idea" name="idea" rows="6" [(ngModel)]="model.idea" required></textarea>
+      </div>
+
+      <div>
+        <label for="observaciones">Observaciones adicionales:</label>
+        <textarea id="observaciones" name="observaciones" rows="4" [(ngModel)]="model.observations"></textarea>
+      </div>
+    </fieldset>
+
+    <div>
+      <label>
+        <input type="checkbox" name="privacidad" [(ngModel)]="model.privacy">
+        He leído la información sobre privacidad.
+      </label>
+    </div>
+
+    @if (error()) {
+      <p class="error-text">{{ error() }}</p>
+    }
+
+    <button type="submit">Enviar solicitud</button>
+  </form>
+</main>

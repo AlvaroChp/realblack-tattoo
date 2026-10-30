@@ -1,0 +1,47 @@
+<main>
+  <h2>Contacto</h2>
+
+  <section>
+    <h3>Información del estudio</h3>
+    <p>Dirección: pendiente de completar.</p>
+    <p>Teléfono: pendiente de completar.</p>
+    <p>Correo electrónico: pendiente de completar.</p>
+    <p>Horario: pendiente de completar.</p>
+  </section>
+
+  <section>
+    <h3>Envíanos un mensaje</h3>
+
+    @if (sent()) {
+      <p class="success-text">Mensaje enviado. Te responderemos lo antes posible.</p>
+    } @else {
+      <form (ngSubmit)="send()">
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" [(ngModel)]="model.name" required>
+        </div>
+
+        <div>
+          <label for="email">Correo electrónico:</label>
+          <input type="email" id="email" name="email" autocomplete="email" [(ngModel)]="model.email" required>
+        </div>
+
+        <div>
+          <label for="asunto">Asunto:</label>
+          <input type="text" id="asunto" name="asunto" [(ngModel)]="model.subject" required>
+        </div>
+
+        <div>
+          <label for="mensaje">Mensaje:</label>
+          <textarea id="mensaje" name="mensaje" rows="6" [(ngModel)]="model.message" required></textarea>
+        </div>
+
+        @if (error()) {
+          <p class="error-text">{{ error() }}</p>
+        }
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
+    }
+  </section>
+</main>

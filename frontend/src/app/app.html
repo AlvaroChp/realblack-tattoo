@@ -1,0 +1,31 @@
+<div class="shell">
+  <header>
+    <a routerLink="/inicio"><h1>REALBLACK TATTOO</h1></a>
+
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a routerLink="/inicio" routerLinkActive="active">Inicio</a></li>
+        <li><a routerLink="/portfolio" routerLinkActive="active">Portfolio</a></li>
+        <li><a routerLink="/artistas" routerLinkActive="active">Artistas</a></li>
+        <li><a routerLink="/servicios" routerLinkActive="active">Servicios</a></li>
+        <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
+        <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
+        <li><a routerLink="/solicitar-cita" routerLinkActive="active">Reservar cita</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <router-outlet />
+
+  <footer>
+    <p>&copy; RealBlack Tattoo</p>
+    <a routerLink="/aviso-legal">Aviso legal</a>
+    <a routerLink="/privacidad">Política de privacidad</a>
+    <a routerLink="/cookies">Política de cookies</a>
+    @if (auth.isLoggedIn()) {
+      <a routerLink="/admin">Panel de administración ({{ auth.user()?.username }})</a>
+    } @else {
+      <a routerLink="/admin/login">Acceso privado</a>
+    }
+  </footer>
+</div>

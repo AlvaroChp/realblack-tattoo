@@ -1,0 +1,15 @@
+<main>
+  @if (post(); as p) {
+    <article>
+      <h2>{{ p.title }}</h2>
+      <p class="muted">{{ p.date }}</p>
+      <p>{{ p.content }}</p>
+      <a routerLink="/blog">Volver al blog</a>
+    </article>
+  } @else {
+    <section>
+      <h2>Artículo no encontrado</h2>
+      <a routerLink="/blog">Volver al blog</a>
+    </section>
+  }
+</main>

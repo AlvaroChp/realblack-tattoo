@@ -1,0 +1,110 @@
+<main>
+  <h2>Gestión de citas</h2>
+
+  <section>
+    <h3>{{ editingId() ? 'Editar cita' : 'Nueva cita' }}</h3>
+
+    <form (ngSubmit)="save()">
+      <div>
+        <label for="c-nombre">Cliente:</label>
+        <input type="text" id="c-nombre" name="c-nombre" [(ngModel)]="form.clientName" required>
+      </div>
+
+      <div>
+        <label for="c-email">Correo del cliente:</label>
+        <input type="email" id="c-email" name="c-email" [(ngModel)]="form.clientEmail">
+      </div>
+
+      <div>
+        <label for="c-telefono">Teléfono del cliente:</label>
+        <input type="tel" id="c-telefono" name="c-telefono" [(ngModel)]="form.clientPhone">
+      </div>
+
+      <div>
+        <label for="c-artista">Artista:</label>
+        <select id="c-artista" name="c-artista" [(ngModel)]="form.artistName" required>
+          <option value="">Selecciona un artista</option>
+          @for (artist of artists(); track artist.id) {
+            <option [value]="artist.name">{{ artist.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label for="c-estilo">Estilo / descripción:</label>
+        <input type="text" id="c-estilo" name="c-estilo" [(ngModel)]="form.style">
+      </div>
+
+      <div>
+        <label for="c-fecha">Fecha:</label>
+        <input type="date" id="c-fecha" name="c-fecha" [(ngModel)]="form.date" required>
+      </div>
+
+      <div>
+        <label for="c-hora">Hora:</label>
+        <input type="time" id="c-hora" name="c-hora" [(ngModel)]="form.time" required>
+      </div>
+
+      <div>
+        <label for="c-estado">Estado:</label>
+        <select id="c-estado" name="c-estado" [(ngModel)]="form.status">
+          <option value="confirmada">Confirmada</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="cancelada">Cancelada</option>
+          <option value="completada">Completada</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="c-notas">Notas:</label>
+        <textarea id="c-notas" name="c-notas" rows="3" [(ngModel)]="form.notes"></textarea>
+      </div>
+
+      @if (error()) {
+        <p class="error-text">{{ error() }}</p>
+      }
+
+      <div class="card-actions">
+        <button type="submit">{{ editingId() ? 'Guardar cambios' : 'Crear cita' }}</button>
+        @if (editingId()) {
+          <button type="button" class="ghost" (click)="reset()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h3>Citas agendadas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Cliente</th>
+          <th>Artista</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (appointment of appointments(); track appointment.id) {
+          <tr>
+            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.time }}</td>
+            <td>{{ appointment.clientName }}</td>
+            <td>{{ appointment.artistName }}</td>
+            <td>{{ appointment.status }}</td>
+            <td class="card-actions">
+              <button class="ghost" (click)="edit(appointment)">Editar</button>
+              <button class="danger" (click)="remove(appointment)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6">No hay citas registradas.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>

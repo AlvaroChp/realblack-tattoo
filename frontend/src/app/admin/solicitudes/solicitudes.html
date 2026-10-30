@@ -1,0 +1,82 @@
+<main>
+  <h2>Solicitudes de cita</h2>
+
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Contacto</th>
+          <th>Idea</th>
+          <th>Artista</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (request of requests(); track request.id) {
+          <tr>
+            <td>{{ request.name }}</td>
+            <td>
+              {{ request.email }}<br>
+              <small>{{ request.phone }}</small>
+            </td>
+            <td>{{ request.idea }}</td>
+            <td>{{ request.artist || 'Sin preferencia' }}</td>
+            <td>{{ request.status }}</td>
+            <td class="card-actions">
+              <button class="ghost" (click)="review(request)">Revisar</button>
+              @if (request.status === 'pendiente') {
+                <button class="ghost" (click)="setStatus(request, 'rechazada')">Rechazar</button>
+              }
+              @if (auth.isAdmin()) {
+                <button class="danger" (click)="remove(request)">Eliminar</button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6">No hay solicitudes recibidas.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+
+  @if (selected(); as request) {
+    <section>
+      <h3>Convertir solicitud en cita</h3>
+      <p>
+        Cliente: <strong>{{ request.name }}</strong> · {{ request.email }} · {{ request.phone }}<br>
+        Estilo: {{ request.style }} · Zona: {{ request.bodyPart }} · Tamaño: {{ request.size }}<br>
+        Idea: {{ request.idea }}
+      </p>
+
+      <form (ngSubmit)="accept()">
+        <div>
+          <label for="fecha">Fecha:</label>
+          <input type="date" id="fecha" name="fecha" [(ngModel)]="appointmentForm.date" required>
+        </div>
+
+        <div>
+          <label for="hora">Hora:</label>
+          <input type="time" id="hora" name="hora" [(ngModel)]="appointmentForm.time" required>
+        </div>
+
+        <div>
+          <label for="notas">Notas:</label>
+          <textarea id="notas" name="notas" rows="3" [(ngModel)]="appointmentForm.notes"></textarea>
+        </div>
+
+        @if (message()) {
+          <p class="error-text">{{ message() }}</p>
+        }
+
+        <div class="card-actions">
+          <button type="submit">Confirmar cita</button>
+          <button type="button" class="ghost" (click)="cancel()">Cancelar</button>
+        </div>
+      </form>
+    </section>
+  }
+</main>

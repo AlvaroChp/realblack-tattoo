@@ -1,0 +1,60 @@
+<main>
+  <h2>Gestión de artistas</h2>
+
+  <section>
+    <h3>{{ editingId() ? 'Editar artista' : 'Nuevo artista' }}</h3>
+
+    <form (ngSubmit)="save()">
+      <div>
+        <label for="a-nombre">Nombre:</label>
+        <input type="text" id="a-nombre" name="a-nombre" [(ngModel)]="form.name" required>
+      </div>
+
+      <div>
+        <label for="a-bio">Descripción:</label>
+        <textarea id="a-bio" name="a-bio" rows="3" [(ngModel)]="form.bio"></textarea>
+      </div>
+
+      <div>
+        <label for="a-image">URL de imagen:</label>
+        <input type="text" id="a-image" name="a-image" [(ngModel)]="form.image">
+      </div>
+
+      <div class="card-actions">
+        <button type="submit">{{ editingId() ? 'Guardar cambios' : 'Añadir artista' }}</button>
+        @if (editingId()) {
+          <button type="button" class="ghost" (click)="reset()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h3>Perfiles publicados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (artist of artists(); track artist.id) {
+          <tr>
+            <td>{{ artist.name }}</td>
+            <td>{{ artist.bio }}</td>
+            <td class="card-actions">
+              <button class="ghost" (click)="edit(artist)">Editar</button>
+              <button class="danger" (click)="remove(artist)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3">No hay artistas publicados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>

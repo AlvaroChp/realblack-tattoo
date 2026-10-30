@@ -1,0 +1,55 @@
+<main>
+  <section>
+    <h2>Bienvenido a RealBlack Tattoo</h2>
+    <p>Descubre nuestro estudio, conoce a nuestros artistas y encuentra inspiración para tu próximo tatuaje.</p>
+    <div class="card-actions">
+      <a routerLink="/portfolio">Ver nuestros trabajos</a>
+      <a routerLink="/solicitar-cita">Solicitar cita</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trabajos destacados</h2>
+    @for (work of featured() | async; track work.id) {
+      <article>
+        <h3><a [routerLink]="['/portfolio', work.id]">{{ work.title }}</a></h3>
+        <p>{{ work.description }}</p>
+      </article>
+    } @empty {
+      <p>Aquí se mostrarán algunos de los tatuajes realizados en el estudio.</p>
+    }
+    <a routerLink="/portfolio">Ver portfolio completo</a>
+  </section>
+
+  <section>
+    <h2>Nuestros artistas</h2>
+    @for (artist of artists() | async; track artist.id) {
+      <article>
+        <h3><a [routerLink]="['/artistas', artist.id]">{{ artist.name }}</a></h3>
+        <p>{{ artist.bio }}</p>
+      </article>
+    } @empty {
+      <p>Conoce a los tatuadores del estudio y descubre sus especialidades.</p>
+    }
+    <a routerLink="/artistas">Conocer a los artistas</a>
+  </section>
+
+  <section>
+    <h2>Nuestros servicios</h2>
+    <p>Descubre los estilos de tatuaje y los servicios que ofrecemos.</p>
+    <a routerLink="/servicios">Consultar servicios</a>
+  </section>
+
+  <section>
+    <h2>Últimas publicaciones</h2>
+    @for (post of posts() | async; track post.id) {
+      <article>
+        <h3><a [routerLink]="['/blog', post.id]">{{ post.title }}</a></h3>
+        <p>{{ post.summary }}</p>
+      </article>
+    } @empty {
+      <p>Noticias, novedades e información relacionada con el estudio.</p>
+    }
+    <a routerLink="/blog">Visitar el blog</a>
+  </section>
+</main>

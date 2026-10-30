@@ -1,0 +1,34 @@
+<main>
+  <h2>Portfolio</h2>
+  <p>Descubre algunos de los trabajos realizados en RealBlack Tattoo.</p>
+
+  <section>
+    <h3>Filtrar por artista</h3>
+    <div>
+      <label for="artista">Selecciona un artista:</label>
+      <select
+        id="artista"
+        [ngModel]="selectedArtist()"
+        (ngModelChange)="filter($event === null || $event === '' ? null : +$event)"
+      >
+        <option [ngValue]="null">Todos los artistas</option>
+        @for (artist of artists() | async; track artist.id) {
+          <option [ngValue]="artist.id">{{ artist.name }}</option>
+        }
+      </select>
+    </div>
+  </section>
+
+  <section>
+    <h3>Trabajos</h3>
+    @for (work of works() | async; track work.id) {
+      <article>
+        <h4><a [routerLink]="['/portfolio', work.id]">{{ work.title }}</a></h4>
+        <p>{{ work.description }}</p>
+        <p>Artista: {{ artistName(work.artistId, artists() | async) }}</p>
+      </article>
+    } @empty {
+      <p>No hay trabajos para este filtro.</p>
+    }
+  </section>
+</main>

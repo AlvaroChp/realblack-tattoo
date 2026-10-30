@@ -1,0 +1,15 @@
+<main>
+  <h2>Nuestros artistas</h2>
+  <p>Conoce a los profesionales de RealBlack Tattoo.</p>
+
+  <section>
+    @for (artist of artists() | async; track artist.id) {
+      <article>
+        <h3><a [routerLink]="['/artistas', artist.id]">{{ artist.name }}</a></h3>
+        <p>{{ artist.bio }}</p>
+      </article>
+    } @empty {
+      <p>Aún no hay perfiles de artistas publicados.</p>
+    }
+  </section>
+</main>

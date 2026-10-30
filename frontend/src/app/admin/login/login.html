@@ -1,0 +1,21 @@
+<main>
+  <h2>Iniciar sesión</h2>
+
+  <form (ngSubmit)="submit()">
+    <div>
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" name="usuario" autocomplete="username" [(ngModel)]="username" required>
+    </div>
+
+    <div>
+      <label for="contrasena">Contraseña:</label>
+      <input type="password" id="contrasena" name="contrasena" autocomplete="current-password" [(ngModel)]="password" required>
+    </div>
+
+    @if (error()) {
+      <p class="error-text">{{ error() }}</p>
+    }
+
+    <button type="submit">Entrar</button>
+  </form>
+</main>
