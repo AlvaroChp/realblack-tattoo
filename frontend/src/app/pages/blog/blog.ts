@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  imports: [AsyncPipe, RouterLink],
+  imports: [RouterLink],
   selector: 'app-blog',
   templateUrl: './blog.html',
 })
 export class Blog {
-  posts = inject(ApiService).getPosts();
+  posts = toSignal(inject(ApiService).getPosts(), { initialValue: [] });
 }

@@ -10,7 +10,7 @@
 
   <section>
     <h2>Trabajos destacados</h2>
-    @for (work of featured() | async; track work.id) {
+    @for (work of featured(); track work.id) {
       <article>
         <h3><a [routerLink]="['/portfolio', work.id]">{{ work.title }}</a></h3>
         <p>{{ work.description }}</p>
@@ -23,10 +23,11 @@
 
   <section>
     <h2>Nuestros artistas</h2>
-    @for (artist of artists() | async; track artist.id) {
+    @for (artist of artists(); track artist.id) {
       <article>
         <h3><a [routerLink]="['/artistas', artist.id]">{{ artist.name }}</a></h3>
         <p>{{ artist.bio }}</p>
+        <p>Especialidad: {{ artist.specialty }}</p>
       </article>
     } @empty {
       <p>Conoce a los tatuadores del estudio y descubre sus especialidades.</p>
@@ -42,7 +43,7 @@
 
   <section>
     <h2>Últimas publicaciones</h2>
-    @for (post of posts() | async; track post.id) {
+    @for (post of posts(); track post.id) {
       <article>
         <h3><a [routerLink]="['/blog', post.id]">{{ post.title }}</a></h3>
         <p>{{ post.summary }}</p>

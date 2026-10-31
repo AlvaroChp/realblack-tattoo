@@ -3,7 +3,7 @@
   <p>Noticias, novedades y artículos relacionados con el estudio y el mundo del tatuaje.</p>
 
   <section>
-    @for (post of posts() | async; track post.id) {
+    @for (post of posts(); track post.id) {
       <article>
         <h3><a [routerLink]="['/blog', post.id]">{{ post.title }}</a></h3>
         <p>{{ post.summary }}</p>

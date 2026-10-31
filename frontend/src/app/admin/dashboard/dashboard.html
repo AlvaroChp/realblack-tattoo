@@ -12,13 +12,13 @@
 
   <section>
     <h3>Solicitudes pendientes</h3>
-    <p>Solicitudes recibidas: {{ (requests() | async)?.length ?? 0 }}</p>
+    <p>Solicitudes recibidas: {{ requests().length }}</p>
     <a routerLink="/admin/solicitudes">Gestionar solicitudes</a>
   </section>
 
   <section>
     <h3>Citas</h3>
-    <p>Citas registradas: {{ (appointments() | async)?.length ?? 0 }}</p>
+    <p>Citas registradas: {{ appointments().length }}</p>
     <a routerLink="/admin/citas">Gestionar citas</a>
   </section>
 

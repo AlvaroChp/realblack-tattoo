@@ -13,6 +13,12 @@ export class ApiService {
   createArtist(data: Partial<Artist>): Observable<Artist> { return this.http.post<Artist>(`${API_URL}/artists`, data); }
   updateArtist(id: number, data: Partial<Artist>): Observable<Artist> { return this.http.put<Artist>(`${API_URL}/artists/${id}`, data); }
   deleteArtist(id: number): Observable<void> { return this.http.delete<void>(`${API_URL}/artists/${id}`); }
+  getEditableText(collection: 'artists' | 'appointments' | 'requests') {
+    return this.http.get<{ collection: string; content: string }>(`${API_URL}/admin/data/${collection}`);
+  }
+  updateEditableText(collection: 'artists' | 'appointments' | 'requests', content: string) {
+    return this.http.put<{ collection: string; content: string }>(`${API_URL}/admin/data/${collection}`, { content });
+  }
 
   // Portfolio
   getPortfolio(artistId?: number | null): Observable<PortfolioWork[]> {

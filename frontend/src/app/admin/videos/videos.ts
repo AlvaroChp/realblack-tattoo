@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   styleUrl: './videos.css',
   templateUrl: './videos.html',
 })
-export class Videos {}
+export class AdminVideos {}

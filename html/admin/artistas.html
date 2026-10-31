@@ -17,22 +17,30 @@
 
     <main>
         <h2>Gestionar artistas</h2>
-        <p>Desde esta sección se podrán crear, editar y eliminar perfiles.</p>
+        <p>Gestiona los perfiles publicados en la web.</p>
 
         <p><a href="editar-artista.html">Añadir artista</a></p>
 
-        <ul>
-            <li>Nick — <a href="editar-artista.html">Editar</a></li>
-            <li>Alba — <a href="editar-artista.html">Editar</a></li>
-            <li>Alex — <a href="editar-artista.html">Editar</a></li>
-            <li>Zaira — <a href="editar-artista.html">Editar</a></li>
-            <li>Carla — <a href="editar-artista.html">Editar</a></li>
-            <li>Gaby — <a href="editar-artista.html">Editar</a></li>
-        </ul>
+        <p id="artists-error" role="alert"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Presentación</th>
+                    <th>Especialidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="artists-list">
+                <tr><td colspan="4">Cargando artistas...</td></tr>
+            </tbody>
+        </table>
     </main>
 
     <footer>
         <a href="panel.html">Volver al panel</a>
     </footer>
 </body>
+<script src="../../js/admin-auth.js"></script>
+<script src="../../js/admin-artists.js"></script>
 </html>
