@@ -1,10 +1,10 @@
-import { Component, inject, input } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  imports: [AsyncPipe, RouterLink],
+  imports: [RouterLink],
   selector: 'app-artista',
   templateUrl: './artista.html',
 })
@@ -12,6 +12,11 @@ export class Artista {
   private api = inject(ApiService);
   id = input.required<number>();
 
-  artists = this.api.getArtists();
-  works = this.api.getPortfolio();
+  artists = toSignal(this.api.getArtists(), { initialValue: [] });
+  works = toSignal(this.api.getPortfolio(), { initialValue: [] });
+  artist = computed(() => this.artists().find(a => a.id === this.id()));
+  artistWorks = computed(() => {
+    const artistId = this.artist()?.id;
+    return artistId === undefined ? [] : this.works().filter(work => work.artistId === artistId);
+  });
 }

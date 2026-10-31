@@ -25,12 +25,12 @@
             <td>{{ request.artist || 'Sin preferencia' }}</td>
             <td>{{ request.status }}</td>
             <td class="card-actions">
-              <button class="ghost" (click)="review(request)">Revisar</button>
+              <button type="button" class="ghost" (click)="review(request)">Revisar</button>
               @if (request.status === 'pendiente') {
-                <button class="ghost" (click)="setStatus(request, 'rechazada')">Rechazar</button>
+                <button type="button" class="ghost" (click)="setStatus(request, 'rechazada')">Rechazar</button>
               }
               @if (auth.isAdmin()) {
-                <button class="danger" (click)="remove(request)">Eliminar</button>
+                <button type="button" class="danger" (click)="remove(request)">Eliminar</button>
               }
             </td>
           </tr>
@@ -77,6 +77,15 @@
           <button type="button" class="ghost" (click)="cancel()">Cancelar</button>
         </div>
       </form>
+    </section>
+  }
+
+  @if (auth.isAdmin()) {
+    <section>
+      <h3>requests.txt</h3>
+      <textarea rows="16" [(ngModel)]="textContent"></textarea>
+      @if (textError()) { <p class="error-text">{{ textError() }}</p> }
+      <button type="button" (click)="saveText()">Guardar requests.txt</button>
     </section>
   }
 </main>

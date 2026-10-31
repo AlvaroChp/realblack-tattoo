@@ -1,13 +1,12 @@
 <main>
-  @if (works() | async; as all) {
-    @if (all.find(w => w.id === id()); as w) {
+  @if (work(); as w) {
       <article>
         <h2>{{ w.title }}</h2>
         @if (w.image) {
           <img [src]="w.image" [alt]="w.title">
         }
         <p>{{ w.description }}</p>
-        @if ((artists() | async)?.find(a => a.id === w.artistId); as a) {
+        @if (artist(); as a) {
           <p>Artista: <a [routerLink]="['/artistas', a.id]">{{ a.name }}</a></p>
         }
         <a routerLink="/portfolio">Volver al portfolio</a>
@@ -18,5 +17,4 @@
         <a routerLink="/portfolio">Volver al portfolio</a>
       </section>
     }
-  }
 </main>

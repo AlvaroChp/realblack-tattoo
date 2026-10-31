@@ -16,12 +16,12 @@
                 <li><a href="panel.html">Panel</a></li>
                 <li><a href="solicitudes.html">Solicitudes de cita</a></li>
                 <li><a href="citas.html">Citas</a></li>
-                <li><a href="artistas.html">Artistas</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="videos.html">Vídeos</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="usuarios.html">Usuarios</a></li>
-                <li><a href="login.html">Cerrar sesión</a></li>
+                <li data-admin-only><a href="artistas.html">Artistas</a></li>
+                <li data-admin-only><a href="portfolio.html">Portfolio</a></li>
+                <li data-admin-only><a href="videos.html">Vídeos</a></li>
+                <li data-admin-only><a href="blog.html">Blog</a></li>
+                <li data-admin-only><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="login.html" data-logout>Cerrar sesión</a></li>
             </ul>
         </nav>
     </header>
@@ -36,7 +36,7 @@
             <a href="solicitudes.html">Gestionar solicitudes</a>
         </section>
 
-        <section>
+        <section data-admin-only>
             <h3>Contenido de la web</h3>
             <ul>
                 <li><a href="artistas.html">Gestionar artistas</a></li>
@@ -46,7 +46,7 @@
             </ul>
         </section>
 
-        <section>
+        <section data-admin-only>
             <h3>Usuarios</h3>
             <a href="usuarios.html">Gestionar usuarios y permisos</a>
         </section>
@@ -55,5 +55,6 @@
     <footer>
         <a href="../../index.html">Volver a la web pública</a>
     </footer>
+    <script src="../../js/admin-auth.js"></script>
 </body>
 </html>

@@ -1,114 +1,63 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "username": "admin",
-      "password": "$2a$10$lfAKbYs/elmY05n0D8YuHe68VJbiusniYBj8N/8V0pYNKjobEtDtO",
-      "role": "admin"
-    },
-    {
-      "id": 2,
-      "username": "manager",
-      "password": "$2a$10$j6e/tfqNEfHGm1PGDdO8muUGgIcySQ4IB2nJnOZ/LDE0p83xOICnK",
-      "role": "manager"
-    }
-  ],
-  "artists": [
-    {
-      "id": 1,
-      "name": "Nick",
-      "bio": "Especialista en blackwork y lettering.",
-      "image": ""
-    },
-    {
-      "id": 2,
-      "name": "Alba",
-      "bio": "Fineline y floral.",
-      "image": ""
-    },
-    {
-      "id": 3,
-      "name": "Alex",
-      "bio": "Realismo y sombra.",
-      "image": ""
-    },
-    {
-      "id": 4,
-      "name": "Zaira",
-      "bio": "Acuarela y color.",
-      "image": ""
-    },
-    {
-      "id": 5,
-      "name": "Carla",
-      "bio": "Neotradicional.",
-      "image": ""
-    },
-    {
-      "id": 6,
-      "name": "Gaby",
-      "bio": "Geométrico y puntillismo.",
-      "image": ""
-    }
-  ],
-  "portfolio": [
-    {
-      "id": 1,
-      "title": "Trabajo de ejemplo 1",
-      "description": "Aquí aparecerá la fotografía del tatuaje y su descripción.",
-      "artistId": 1,
-      "image": ""
-    },
-    {
-      "id": 2,
-      "title": "Trabajo de ejemplo 2",
-      "description": "Aquí aparecerá la fotografía del tatuaje y su descripción.",
-      "artistId": 2,
-      "image": ""
-    },
-    {
-      "id": 3,
-      "title": "Trabajo de ejemplo 3",
-      "description": "Aquí aparecerá la fotografía del tatuaje y su descripción.",
-      "artistId": 5,
-      "image": ""
-    }
-  ],
-  "videos": [
-    {
-      "id": 1,
-      "title": "Vídeo de ejemplo",
-      "url": ""
-    }
-  ],
-  "blog": [
-    {
-      "id": 1,
-      "title": "Artículo de ejemplo",
-      "summary": "Resumen del artículo que se publicará en el blog.",
-      "content": "Contenido del artículo de ejemplo.",
-      "date": "2026-10-30"
-    },
-    {
-      "id": 2,
-      "title": "Otra publicación",
-      "summary": "Resumen de otra publicación del estudio.",
-      "content": "Contenido de otra publicación.",
-      "date": "2026-10-30"
-    }
-  ],
-  "requests": [],
-  "appointments": [
-    {
-      "id": 1,
-      "clientName": "Ana",
-      "artistName": "Nick",
-      "date": "2026-11-05",
-      "time": "17:00",
-      "notes": "",
-      "requestId": null,
-      "status": "confirmada",
-      "createdAt": "2026-10-30T16:32:04.851Z"
-    }
-  ]
+  "users" : [ {
+    "id" : 1,
+    "username" : "admin",
+    "password" : "$2a$10$lfAKbYs/elmY05n0D8YuHe68VJbiusniYBj8N/8V0pYNKjobEtDtO",
+    "role" : "admin"
+  }, {
+    "id" : 2,
+    "username" : "manager",
+    "password" : "$2a$10$j6e/tfqNEfHGm1PGDdO8muUGgIcySQ4IB2nJnOZ/LDE0p83xOICnK",
+    "role" : "manager"
+  } ],
+  "artists" : [ ],
+  "portfolio" : [ {
+    "id" : 1,
+    "title" : "Trabajo de ejemplo 1",
+    "description" : "Aquí aparecerá la fotografía del tatuaje y su descripción.",
+    "artistId" : 1,
+    "image" : ""
+  }, {
+    "id" : 2,
+    "title" : "Trabajo de ejemplo 2",
+    "description" : "Aquí aparecerá la fotografía del tatuaje y su descripción.",
+    "artistId" : 2,
+    "image" : ""
+  }, {
+    "id" : 3,
+    "title" : "Trabajo de ejemplo 3",
+    "description" : "Aquí aparecerá la fotografía del tatuaje y su descripción.",
+    "artistId" : 5,
+    "image" : ""
+  } ],
+  "videos" : [ {
+    "id" : 1,
+    "title" : "Vídeo de ejemplo",
+    "url" : ""
+  } ],
+  "blog" : [ {
+    "id" : 1,
+    "title" : "Artículo de ejemplo",
+    "summary" : "Resumen del artículo que se publicará en el blog.",
+    "content" : "Contenido del artículo de ejemplo.",
+    "date" : "2026-10-30"
+  }, {
+    "id" : 2,
+    "title" : "Otra publicación",
+    "summary" : "Resumen de otra publicación del estudio.",
+    "content" : "Contenido de otra publicación.",
+    "date" : "2026-10-30"
+  } ],
+  "requests" : [ ],
+  "appointments" : [ {
+    "id" : 1,
+    "clientName" : "Ana",
+    "artistName" : "Nick",
+    "date" : "2026-11-05",
+    "time" : "17:00",
+    "notes" : "",
+    "requestId" : null,
+    "status" : "confirmada",
+    "createdAt" : "2026-10-30T16:32:04.851Z"
+  } ]
 }

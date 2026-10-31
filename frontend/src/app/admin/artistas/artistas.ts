@@ -14,10 +14,13 @@ export class AdminArtistas {
   artists = signal<Artist[]>([]);
   editingId = signal<number | null>(null);
 
-  form = { name: '', bio: '', image: '' };
+  form = { name: '', bio: '', specialty: '', image: '' };
+  textContent = '';
+  textError = signal('');
 
   constructor() {
     this.load();
+    this.api.getEditableText('artists').subscribe(data => this.textContent = data.content);
   }
 
   load() {
@@ -26,12 +29,12 @@ export class AdminArtistas {
 
   reset() {
     this.editingId.set(null);
-    this.form = { name: '', bio: '', image: '' };
+    this.form = { name: '', bio: '', specialty: '', image: '' };
   }
 
   edit(artist: Artist) {
     this.editingId.set(artist.id);
-    this.form = { name: artist.name, bio: artist.bio, image: artist.image };
+    this.form = { name: artist.name, bio: artist.bio, specialty: artist.specialty, image: artist.image };
   }
 
   save() {
@@ -41,6 +44,14 @@ export class AdminArtistas {
     req.subscribe(() => {
       this.reset();
       this.load();
+    });
+  }
+
+  saveText() {
+    this.textError.set('');
+    this.api.updateEditableText('artists', this.textContent).subscribe({
+      next: data => { this.textContent = data.content; this.load(); },
+      error: error => this.textError.set(error.error?.error ?? 'No se pudo guardar artists.txt.')
     });
   }
 

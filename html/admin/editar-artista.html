@@ -15,7 +15,8 @@
     <main>
         <h2>Crear o editar artista</h2>
 
-        <form action="artistas.html" method="get">
+        <p id="artist-error" role="alert"></p>
+        <form id="artist-form">
             <p>
                 <label for="nombre">Nombre:</label><br>
                 <input type="text" id="nombre" name="nombre" required>
@@ -33,13 +34,14 @@
 
             <p>
                 <label for="foto">Fotografía:</label><br>
-                <input type="file" id="foto" name="foto" accept="image/*">
+                <input type="url" id="foto" name="foto" placeholder="https://...">
             </p>
 
             <button type="submit">Guardar</button>
         </form>
 
-        <p>El formulario todavía no guarda cambios.</p>
     </main>
 </body>
+<script src="../../js/admin-auth.js"></script>
+<script src="../../js/admin-artist-edit.js"></script>
 </html>

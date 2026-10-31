@@ -1,12 +1,11 @@
-import { Component, computed, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AuthService } from '../../core/auth.service';
-import { ApiService } from '../../core/api.service';
+import { AuthService } from '../core/auth.service';
+import { ApiService } from '../core/api.service';
 
 @Component({
   selector: 'app-admin-shell',
-  imports: [AsyncPipe, RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   template: `
     <div class="shell">
       <header>

@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  imports: [RouterLink, AsyncPipe],
+  imports: [RouterLink],
   selector: 'app-home',
   templateUrl: './home.html',
 })
 export class Home {
   private api = inject(ApiService);
 
-  featured = this.api.getPortfolio();
-  artists = this.api.getArtists();
-  posts = this.api.getPosts();
+  featured = toSignal(this.api.getPortfolio(), { initialValue: [] });
+  artists = toSignal(this.api.getArtists(), { initialValue: [] });
+  posts = toSignal(this.api.getPosts(), { initialValue: [] });
 }

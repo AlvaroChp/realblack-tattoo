@@ -1,12 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/api.service';
 import { AuthService } from '../../core/auth.service';
 import { CitationRequest } from '../../core/models';
 
 @Component({
-  imports: [AsyncPipe, FormsModule],
+  imports: [FormsModule],
   selector: 'app-admin-solicitudes',
   templateUrl: './solicitudes.html',
 })
@@ -19,9 +18,14 @@ export class Solicitudes {
 
   appointmentForm = { date: '', time: '', notes: '' };
   message = signal('');
+  textContent = '';
+  textError = signal('');
 
   constructor() {
     this.load();
+    if (this.auth.isAdmin()) {
+      this.api.getEditableText('requests').subscribe(data => this.textContent = data.content);
+    }
   }
 
   load() {
@@ -42,6 +46,14 @@ export class Solicitudes {
     if (confirm(`¿Eliminar la solicitud de ${request.name}?`)) {
       this.api.deleteRequest(request.id).subscribe(() => this.load());
     }
+  }
+
+  saveText() {
+    this.textError.set('');
+    this.api.updateEditableText('requests', this.textContent).subscribe({
+      next: data => { this.textContent = data.content; this.load(); },
+      error: error => this.textError.set(error.error?.error ?? 'No se pudo guardar requests.txt.')
+    });
   }
 
   accept() {

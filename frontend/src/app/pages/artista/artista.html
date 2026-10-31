@@ -1,18 +1,18 @@
 <main>
-  @if (artists() | async; as all) {
-    @if (all.find(a => a.id === id()); as artist) {
+  @if (artist(); as artist) {
       <article>
         <h2>{{ artist.name }}</h2>
         @if (artist.image) {
           <img [src]="artist.image" [alt]="artist.name">
         }
         <p>{{ artist.bio }}</p>
+        <p>Especialidad: {{ artist.specialty }}</p>
         <a routerLink="/artistas">Volver a artistas</a>
       </article>
 
       <section>
         <h3>Trabajos de {{ artist.name }}</h3>
-        @for (work of (works() | async)?.filter(w => w.artistId === artist.id); track work.id) {
+        @for (work of artistWorks(); track work.id) {
           <article>
             <h4><a [routerLink]="['/portfolio', work.id]">{{ work.title }}</a></h4>
             <p>{{ work.description }}</p>
@@ -27,5 +27,4 @@
         <a routerLink="/artistas">Volver a artistas</a>
       </section>
     }
-  }
 </main>
