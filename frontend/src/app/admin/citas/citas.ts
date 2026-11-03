@@ -16,8 +16,6 @@ export class Citas {
   appointments = signal<Appointment[]>([]);
   editingId = signal<number | null>(null);
   error = signal('');
-  textContent = '';
-  textError = signal('');
 
   artists = signal<{ id: number; name: string }[]>([]);
 
@@ -35,7 +33,6 @@ export class Citas {
 
   constructor() {
     this.load();
-    this.api.getEditableText('appointments').subscribe(data => this.textContent = data.content);
     this.api.getArtists().subscribe(a => this.artists.set(a));
   }
 
@@ -43,14 +40,6 @@ export class Citas {
     this.api.getAppointments().subscribe(a =>
       this.appointments.set([...a].sort((x, y) => (x.date + x.time < y.date + y.time ? 1 : -1)))
     );
-  }
-
-  saveText() {
-    this.textError.set('');
-    this.api.updateEditableText('appointments', this.textContent).subscribe({
-      next: data => { this.textContent = data.content; this.load(); },
-      error: error => this.textError.set(error.error?.error ?? 'No se pudo guardar appointments.txt.')
-    });
   }
 
   reset() {

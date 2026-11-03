@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/api.service';
+import { ImageInput } from '../../core/image-input.component';
 import { Artist } from '../../core/models';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, ImageInput],
   selector: 'app-admin-artistas',
   templateUrl: './artistas.html',
 })
@@ -15,12 +16,9 @@ export class AdminArtistas {
   editingId = signal<number | null>(null);
 
   form = { name: '', bio: '', specialty: '', image: '' };
-  textContent = '';
-  textError = signal('');
 
   constructor() {
     this.load();
-    this.api.getEditableText('artists').subscribe(data => this.textContent = data.content);
   }
 
   load() {
@@ -39,19 +37,15 @@ export class AdminArtistas {
 
   save() {
     if (!this.form.name) return;
+    const data: Partial<Artist> = { name: this.form.name, bio: this.form.bio, specialty: this.form.specialty };
+    if (this.form.image) {
+      data.image = this.form.image;
+    }
     const id = this.editingId();
-    const req = id ? this.api.updateArtist(id, this.form) : this.api.createArtist(this.form);
+    const req = id ? this.api.updateArtist(id, data) : this.api.createArtist(data);
     req.subscribe(() => {
       this.reset();
       this.load();
-    });
-  }
-
-  saveText() {
-    this.textError.set('');
-    this.api.updateEditableText('artists', this.textContent).subscribe({
-      next: data => { this.textContent = data.content; this.load(); },
-      error: error => this.textError.set(error.error?.error ?? 'No se pudo guardar artists.txt.')
     });
   }
 

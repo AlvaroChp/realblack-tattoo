@@ -24,6 +24,11 @@
     @for (work of works().filter(w => !selectedArtist() || w.artistId === selectedArtist()); track work.id) {
       <article>
         <h4><a [routerLink]="['/portfolio', work.id]">{{ work.title }}</a></h4>
+        @if (work.image) {
+          <a [routerLink]="['/portfolio', work.id]">
+            <img [src]="work.image" [alt]="work.title" style="max-width: 320px; max-height: 240px;">
+          </a>
+        }
         <p>{{ work.description }}</p>
         <p>Artista: {{ artistName(work.artistId) }}</p>
       </article>

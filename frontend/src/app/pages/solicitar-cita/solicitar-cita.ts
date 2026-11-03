@@ -2,9 +2,10 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/api.service';
+import { ImageInput } from '../../core/image-input.component';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, ImageInput],
   selector: 'app-solicitar-cita',
   templateUrl: './solicitar-cita.html',
 })
@@ -24,6 +25,7 @@ export class SolicitarCita {
     size: '',
     idea: '',
     observations: '',
+    referenceImage: '',
     privacy: false
   };
 
@@ -55,7 +57,8 @@ export class SolicitarCita {
         bodyPart: m.bodyPart,
         size: m.size,
         idea: m.idea,
-        observations: m.observations
+        observations: m.observations,
+        referenceImage: m.referenceImage
       })
       .subscribe({
         next: () => this.router.navigate(['/gracias']),

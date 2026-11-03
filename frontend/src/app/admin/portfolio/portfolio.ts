@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/api.service';
+import { ImageInput } from '../../core/image-input.component';
 import { Artist, PortfolioWork } from '../../core/models';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, ImageInput],
   selector: 'app-admin-portfolio',
   templateUrl: './portfolio.html',
 })
@@ -43,12 +44,14 @@ export class AdminPortfolio {
 
   save() {
     if (!this.form.title) return;
-    const data = {
+    const data: Partial<PortfolioWork> = {
       title: this.form.title,
       description: this.form.description,
       artistId: this.form.artistId ? +this.form.artistId : null,
-      image: this.form.image
     };
+    if (this.form.image) {
+      data.image = this.form.image;
+    }
     const id = this.editingId();
     const req = id ? this.api.updateWork(id, data) : this.api.createWork(data);
     req.subscribe(() => {

@@ -63,6 +63,11 @@
         <label for="observaciones">Observaciones adicionales:</label>
         <textarea id="observaciones" name="observaciones" rows="4" [(ngModel)]="model.observations"></textarea>
       </div>
+
+      <div>
+        <label>Ideas de referencia (opcional):</label>
+        <app-image-input id="ref" [(value)]="model.referenceImage" alt="Imagen de referencia" />
+      </div>
     </fieldset>
 
     <div>

@@ -45,6 +45,7 @@ export interface CitationRequest {
   size: string;
   idea: string;
   observations: string;
+  referenceImage: string;
   status: string;
   createdAt: string;
 }

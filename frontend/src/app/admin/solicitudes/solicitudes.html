@@ -8,6 +8,7 @@
           <th>Cliente</th>
           <th>Contacto</th>
           <th>Idea</th>
+          <th>Referencia</th>
           <th>Artista</th>
           <th>Estado</th>
           <th>Acción</th>
@@ -22,6 +23,13 @@
               <small>{{ request.phone }}</small>
             </td>
             <td>{{ request.idea }}</td>
+            <td>
+              @if (request.referenceImage) {
+                <button type="button" class="ghost" (click)="showImage(request)">Ver imagen</button>
+              } @else {
+                —
+              }
+            </td>
             <td>{{ request.artist || 'Sin preferencia' }}</td>
             <td>{{ request.status }}</td>
             <td class="card-actions">
@@ -36,7 +44,7 @@
           </tr>
         } @empty {
           <tr>
-            <td colspan="6">No hay solicitudes recibidas.</td>
+            <td colspan="7">No hay solicitudes recibidas.</td>
           </tr>
         }
       </tbody>
@@ -51,6 +59,13 @@
         Estilo: {{ request.style }} · Zona: {{ request.bodyPart }} · Tamaño: {{ request.size }}<br>
         Idea: {{ request.idea }}
       </p>
+
+      @if (request.referenceImage) {
+        <p>
+          Imagen de referencia:<br>
+          <img [src]="request.referenceImage" alt="Imagen de referencia de {{ request.name }}" style="max-width: 320px; max-height: 240px;">
+        </p>
+      }
 
       <form (ngSubmit)="accept()">
         <div>
@@ -80,12 +95,15 @@
     </section>
   }
 
-  @if (auth.isAdmin()) {
-    <section>
-      <h3>requests.txt</h3>
-      <textarea rows="16" [(ngModel)]="textContent"></textarea>
-      @if (textError()) { <p class="error-text">{{ textError() }}</p> }
-      <button type="button" (click)="saveText()">Guardar requests.txt</button>
-    </section>
+  @if (fullImage(); as request) {
+    <div
+      style="position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 1000;"
+      (click)="closeImage()"
+    >
+      <figure style="margin: 0; max-width: 90vw; text-align: center;">
+        <img [src]="request.referenceImage" [alt]="'Referencia de ' + request.name" style="max-width: 100%; max-height: 80vh;">
+        <figcaption>{{ request.name }} — clic fuera para cerrar</figcaption>
+      </figure>
+    </div>
   }
 </main>

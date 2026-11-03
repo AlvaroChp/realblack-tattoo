@@ -1,1 +1,77 @@
-<p>portfolio works!</p>
+<main>
+  <h2>Gestión de portfolio</h2>
+
+  <section>
+    <h3>{{ editingId() ? 'Editar trabajo' : 'Nuevo trabajo' }}</h3>
+
+    <form (ngSubmit)="save()">
+      <div>
+        <label for="p-titulo">Título:</label>
+        <input type="text" id="p-titulo" name="p-titulo" [(ngModel)]="form.title" required>
+      </div>
+
+      <div>
+        <label for="p-descripcion">Descripción:</label>
+        <textarea id="p-descripcion" name="p-descripcion" rows="3" [(ngModel)]="form.description"></textarea>
+      </div>
+
+      <div>
+        <label for="p-artista">Artista:</label>
+        <select id="p-artista" name="p-artista" [(ngModel)]="form.artistId">
+          <option value="">Sin asignar</option>
+          @for (artist of artists(); track artist.id) {
+            <option [value]="artist.id">{{ artist.name }}</option>
+          }
+        </select>
+      </div>
+
+      <app-image-input id="p" [(value)]="form.image" alt="Imagen del trabajo" />
+
+      <div class="card-actions">
+        <button type="submit">{{ editingId() ? 'Guardar cambios' : 'Añadir trabajo' }}</button>
+        @if (editingId()) {
+          <button type="button" class="ghost" (click)="reset()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h3>Trabajos publicados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Descripción</th>
+          <th>Artista</th>
+          <th>Imagen</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (work of works(); track work.id) {
+          <tr>
+            <td>{{ work.title }}</td>
+            <td>{{ work.description }}</td>
+            <td>{{ artistName(work.artistId) }}</td>
+            <td>
+              @if (work.image) {
+                <img [src]="work.image" [alt]="work.title" style="max-width: 96px; max-height: 72px;">
+              } @else {
+                —
+              }
+            </td>
+            <td class="card-actions">
+              <button type="button" class="ghost" (click)="edit(work)">Editar</button>
+              <button type="button" class="danger" (click)="remove(work)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5">No hay trabajos publicados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>

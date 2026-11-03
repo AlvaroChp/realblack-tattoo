@@ -15,17 +15,13 @@ export class Solicitudes {
 
   requests = signal<CitationRequest[]>([]);
   selected = signal<CitationRequest | null>(null);
+  fullImage = signal<CitationRequest | null>(null);
 
   appointmentForm = { date: '', time: '', notes: '' };
   message = signal('');
-  textContent = '';
-  textError = signal('');
 
   constructor() {
     this.load();
-    if (this.auth.isAdmin()) {
-      this.api.getEditableText('requests').subscribe(data => this.textContent = data.content);
-    }
   }
 
   load() {
@@ -34,6 +30,7 @@ export class Solicitudes {
 
   review(request: CitationRequest) {
     this.selected.set(request);
+    this.fullImage.set(null);
     this.message.set('');
     this.appointmentForm = { date: '', time: '', notes: '' };
   }
@@ -46,14 +43,6 @@ export class Solicitudes {
     if (confirm(`¿Eliminar la solicitud de ${request.name}?`)) {
       this.api.deleteRequest(request.id).subscribe(() => this.load());
     }
-  }
-
-  saveText() {
-    this.textError.set('');
-    this.api.updateEditableText('requests', this.textContent).subscribe({
-      next: data => { this.textContent = data.content; this.load(); },
-      error: error => this.textError.set(error.error?.error ?? 'No se pudo guardar requests.txt.')
-    });
   }
 
   accept() {
@@ -73,7 +62,8 @@ export class Solicitudes {
         date: this.appointmentForm.date,
         time: this.appointmentForm.time,
         notes: this.appointmentForm.notes,
-        requestId: request.id
+        requestId: request.id,
+        status: 'confirmada'
       })
       .subscribe(() => {
         this.selected.set(null);
@@ -84,5 +74,13 @@ export class Solicitudes {
 
   cancel() {
     this.selected.set(null);
+  }
+
+  showImage(request: CitationRequest) {
+    this.fullImage.set(request);
+  }
+
+  closeImage() {
+    this.fullImage.set(null);
   }
 }

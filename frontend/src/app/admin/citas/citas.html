@@ -107,10 +107,4 @@
       </tbody>
     </table>
   </section>
-  <section>
-    <h3>appointments.txt</h3>
-    <textarea rows="16" [(ngModel)]="textContent"></textarea>
-    @if (textError()) { <p class="error-text">{{ textError() }}</p> }
-    <button type="button" (click)="saveText()">Guardar appointments.txt</button>
-  </section>
 </main>
