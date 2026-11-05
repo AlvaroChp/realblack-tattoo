@@ -1,5 +1,6 @@
--- Datos de ejemplo de RealBlack Tattoo (los del antiguo backend/data).
--- Si ya ejecutaste scripts/migrate-data-to-mysql.php, NO hace falta importar esto.
+-- Datos de ejemplo de RealBlack Tattoo (usuarios, tatuadores, portfolio, vídeos,
+-- blog y una cita de ejemplo). No incluye solicitudes: para eso, exporta la base
+-- de datos real desde phpMyAdmin (Exportar → SQL) e impórtala en el otro equipo.
 -- IMPORTANTE: importa primero schema.sql (pestaña Importar de phpMyAdmin con la base
 -- "realblack" seleccionada) y después este archivo.
 

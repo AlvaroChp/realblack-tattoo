@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS artists (
     name       VARCHAR(120) NOT NULL,
     bio        TEXT        NOT NULL,
     specialty  VARCHAR(120) NOT NULL DEFAULT '',
-    image      TEXT        NOT NULL,
+    image      LONGTEXT    NOT NULL,
     created_at DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS portfolio (
     title       VARCHAR(200) NOT NULL,
     description TEXT        NOT NULL,
     artist_id   BIGINT      NULL,
-    image       TEXT        NOT NULL,
+    image       LONGTEXT    NOT NULL,
     CONSTRAINT fk_portfolio_artist FOREIGN KEY (artist_id)
         REFERENCES artists(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
