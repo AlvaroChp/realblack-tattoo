@@ -26,14 +26,6 @@ export interface Video {
   url: string;
 }
 
-export interface BlogPost {
-  id: number;
-  title: string;
-  summary: string;
-  content: string;
-  date: string;
-}
-
 export interface CitationRequest {
   id: number;
   name: string;
@@ -57,8 +49,8 @@ export interface Appointment {
   clientPhone: string;
   artistName: string;
   style: string;
-  date: string;
-  time: string;
+  date: string | null;
+  time: string | null;
   notes: string;
   requestId: number | null;
   status: string;

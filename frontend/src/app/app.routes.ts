@@ -9,8 +9,6 @@ export const routes: Routes = [
   { path: 'artistas', loadComponent: () => import('./pages/artistas/artistas').then(m => m.Artistas) },
   { path: 'artistas/:id', loadComponent: () => import('./pages/artista/artista').then(m => m.Artista) },
   { path: 'servicios', loadComponent: () => import('./pages/servicios/servicios').then(m => m.Servicios) },
-  { path: 'blog', loadComponent: () => import('./pages/blog/blog').then(m => m.Blog) },
-  { path: 'blog/:id', loadComponent: () => import('./pages/articulo/articulo').then(m => m.Articulo) },
   { path: 'contacto', loadComponent: () => import('./pages/contacto/contacto').then(m => m.Contacto) },
   { path: 'solicitar-cita', loadComponent: () => import('./pages/solicitar-cita/solicitar-cita').then(m => m.SolicitarCita) },
   { path: 'gracias', loadComponent: () => import('./pages/confirmacion/confirmacion').then(m => m.Confirmacion) },

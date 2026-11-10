@@ -40,17 +40,4 @@
     <p>Descubre los estilos de tatuaje y los servicios que ofrecemos.</p>
     <a routerLink="/servicios">Consultar servicios</a>
   </section>
-
-  <section>
-    <h2>Últimas publicaciones</h2>
-    @for (post of posts(); track post.id) {
-      <article>
-        <h3><a [routerLink]="['/blog', post.id]">{{ post.title }}</a></h3>
-        <p>{{ post.summary }}</p>
-      </article>
-    } @empty {
-      <p>Noticias, novedades e información relacionada con el estudio.</p>
-    }
-    <a routerLink="/blog">Visitar el blog</a>
-  </section>
 </main>

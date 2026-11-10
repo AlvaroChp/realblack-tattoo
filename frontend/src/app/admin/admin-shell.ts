@@ -21,7 +21,6 @@ import { ApiService } from '../core/api.service';
               <li><a routerLink="/admin/artistas" routerLinkActive="active">Artistas</a></li>
               <li><a routerLink="/admin/portfolio" routerLinkActive="active">Portfolio</a></li>
               <li><a routerLink="/admin/videos" routerLinkActive="active">Vídeos</a></li>
-              <li><a routerLink="/admin/blog" routerLinkActive="active">Blog</a></li>
               <li><a routerLink="/admin/usuarios" routerLinkActive="active">Usuarios</a></li>
             }
             <li><a href="#" (click)="logout($event)">Cerrar sesión</a></li>

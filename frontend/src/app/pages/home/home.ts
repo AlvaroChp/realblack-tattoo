@@ -13,5 +13,4 @@ export class Home {
 
   featured = toSignal(this.api.getPortfolio(), { initialValue: [] });
   artists = toSignal(this.api.getArtists(), { initialValue: [] });
-  posts = toSignal(this.api.getPosts(), { initialValue: [] });
 }

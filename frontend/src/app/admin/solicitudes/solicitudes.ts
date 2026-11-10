@@ -33,6 +33,7 @@ export class Solicitudes {
     this.fullImage.set(null);
     this.message.set('');
     this.appointmentForm = { date: '', time: '', notes: '' };
+    setTimeout(() => document.getElementById('convertir-cita')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 
   setStatus(request: CitationRequest, status: string) {
@@ -52,24 +53,33 @@ export class Solicitudes {
       this.message.set('Indica fecha y hora para la cita.');
       return;
     }
-    this.api
-      .createAppointment({
-        clientName: request.name,
-        clientEmail: request.email,
-        clientPhone: request.phone,
-        artistName: request.artist || 'Sin asignar',
-        style: request.style,
-        date: this.appointmentForm.date,
-        time: this.appointmentForm.time,
-        notes: this.appointmentForm.notes,
-        requestId: request.id,
-        status: 'confirmada'
-      })
-      .subscribe(() => {
+    this.api.getAppointments().subscribe(appointments => {
+      const linked = appointments.find(a => a.requestId === request.id);
+      const req = linked
+        ? this.api.updateAppointment(linked.id, {
+            date: this.appointmentForm.date,
+            time: this.appointmentForm.time,
+            notes: this.appointmentForm.notes || linked.notes,
+            status: 'confirmada'
+          })
+        : this.api.createAppointment({
+            clientName: request.name,
+            clientEmail: request.email,
+            clientPhone: request.phone,
+            artistName: request.artist || 'Sin asignar',
+            style: request.style,
+            date: this.appointmentForm.date,
+            time: this.appointmentForm.time,
+            notes: this.appointmentForm.notes,
+            requestId: request.id,
+            status: 'confirmada'
+          });
+      req.subscribe(() => {
         this.selected.set(null);
         this.message.set('');
         this.load();
       });
+    });
   }
 
   cancel() {

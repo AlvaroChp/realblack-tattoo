@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_URL } from './auth.service';
-import { Artist, Appointment, BlogPost, CitationRequest, PortfolioWork, User, Video } from './models';
+import { Artist, Appointment, CitationRequest, PortfolioWork, User, Video } from './models';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -29,13 +29,6 @@ export class ApiService {
   createVideo(data: Partial<Video>): Observable<Video> { return this.http.post<Video>(`${API_URL}/videos`, data); }
   updateVideo(id: number, data: Partial<Video>): Observable<Video> { return this.http.put<Video>(`${API_URL}/videos/${id}`, data); }
   deleteVideo(id: number): Observable<void> { return this.http.delete<void>(`${API_URL}/videos/${id}`); }
-
-  // Blog
-  getPosts(): Observable<BlogPost[]> { return this.http.get<BlogPost[]>(`${API_URL}/blog`); }
-  getPost(id: number): Observable<BlogPost> { return this.http.get<BlogPost>(`${API_URL}/blog/${id}`); }
-  createPost(data: Partial<BlogPost>): Observable<BlogPost> { return this.http.post<BlogPost>(`${API_URL}/blog`, data); }
-  updatePost(id: number, data: Partial<BlogPost>): Observable<BlogPost> { return this.http.put<BlogPost>(`${API_URL}/blog/${id}`, data); }
-  deletePost(id: number): Observable<void> { return this.http.delete<void>(`${API_URL}/blog/${id}`); }
 
   // Solicitudes
   createRequest(data: Partial<CitationRequest>): Observable<CitationRequest> { return this.http.post<CitationRequest>(`${API_URL}/requests`, data); }

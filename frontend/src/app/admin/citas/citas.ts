@@ -25,8 +25,8 @@ export class Citas {
     clientPhone: '',
     artistName: '',
     style: '',
-    date: '',
-    time: '',
+    date: '' as string | null,
+    time: '' as string | null,
     notes: '',
     status: 'confirmada'
   };
@@ -38,7 +38,16 @@ export class Citas {
 
   load() {
     this.api.getAppointments().subscribe(a =>
-      this.appointments.set([...a].sort((x, y) => (x.date + x.time < y.date + y.time ? 1 : -1)))
+      this.appointments.set(
+        [...a].sort((x, y) => {
+          const dx = x.date ?? '9999-12-31';
+          const dy = y.date ?? '9999-12-31';
+          if (dx !== dy) return dx < dy ? -1 : 1;
+          const tx = x.time ?? '99:99';
+          const ty = y.time ?? '99:99';
+          return tx < ty ? -1 : 1;
+        })
+      )
     );
   }
 
