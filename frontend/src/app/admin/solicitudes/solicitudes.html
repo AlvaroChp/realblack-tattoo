@@ -52,12 +52,15 @@
   </section>
 
   @if (selected(); as request) {
-    <section>
+    <section id="convertir-cita">
       <h3>Convertir solicitud en cita</h3>
       <p>
         Cliente: <strong>{{ request.name }}</strong> · {{ request.email }} · {{ request.phone }}<br>
         Estilo: {{ request.style }} · Zona: {{ request.bodyPart }} · Tamaño: {{ request.size }}<br>
         Idea: {{ request.idea }}
+        @if (request.observations) {
+          <br>Observaciones: {{ request.observations }}
+        }
       </p>
 
       @if (request.referenceImage) {

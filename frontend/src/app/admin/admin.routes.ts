@@ -13,7 +13,6 @@ export const ADMIN_ROUTES: Routes = [
       { path: 'citas', canActivate: [authGuard], loadComponent: () => import('./citas/citas').then(m => m.Citas) },
       { path: 'artistas', canActivate: [adminGuard], loadComponent: () => import('./artistas/artistas').then(m => m.AdminArtistas) },
       { path: 'portfolio', canActivate: [adminGuard], loadComponent: () => import('./portfolio/portfolio').then(m => m.AdminPortfolio) },
-      { path: 'blog', canActivate: [adminGuard], loadComponent: () => import('./blog/blog').then(m => m.AdminBlog) },
       { path: 'usuarios', canActivate: [adminGuard], loadComponent: () => import('./usuarios/usuarios').then(m => m.AdminUsuarios) },
       { path: 'videos', canActivate: [adminGuard], loadComponent: () => import('./videos/videos').then(m => m.AdminVideos) }
     ]

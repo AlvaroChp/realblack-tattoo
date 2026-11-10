@@ -40,14 +40,6 @@ CREATE TABLE IF NOT EXISTS videos (
     url   TEXT        NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS blog (
-    id      BIGINT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title   VARCHAR(200) NOT NULL,
-    summary TEXT        NOT NULL,
-    content LONGTEXT    NOT NULL,
-    date    DATE        NULL
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS requests (
     id           BIGINT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name         VARCHAR(150) NOT NULL,
@@ -72,8 +64,8 @@ CREATE TABLE IF NOT EXISTS appointments (
     client_phone VARCHAR(50)  NOT NULL DEFAULT '',
     artist_name  VARCHAR(120) NOT NULL,
     style        VARCHAR(150) NOT NULL DEFAULT '',
-    date         DATE        NOT NULL,
-    time         TIME        NOT NULL,
+    date         DATE        NULL,
+    time         TIME        NULL,
     notes        TEXT        NOT NULL,
     request_id   BIGINT      NULL,
     status       VARCHAR(20) NOT NULL DEFAULT 'confirmada'

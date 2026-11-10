@@ -72,13 +72,6 @@ public class CollectionRepository {
                     new Column("title", "title", Kind.STRING),
                     new Column("url", "url", Kind.STRING)),
                     "id", Set.of()),
-            "blog", new Spec("blog", List.of(
-                    ID,
-                    new Column("title", "title", Kind.STRING),
-                    new Column("summary", "summary", Kind.STRING),
-                    new Column("content", "content", Kind.STRING),
-                    new Column("date", "date", Kind.DATE)),
-                    "date DESC, id DESC", Set.of()),
             "requests", new Spec("requests", List.of(
                     ID,
                     new Column("name", "name", Kind.STRING),
@@ -310,8 +303,8 @@ public class CollectionRepository {
                 yield text;
             }
             case LONG -> value.isNumber() ? value.asLong() : null;
-            case DATE -> parseDate(value.asText());
-            case TIME -> parseTime(value.asText());
+            case DATE -> value.isNull() ? null : parseDate(value.asText());
+            case TIME -> value.isNull() ? null : parseTime(value.asText());
             case INSTANT -> null;
         };
     }

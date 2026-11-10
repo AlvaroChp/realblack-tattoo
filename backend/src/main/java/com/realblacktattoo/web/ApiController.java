@@ -84,16 +84,6 @@ public class ApiController {
         return repository.list("videos");
     }
 
-    @GetMapping("/blog")
-    public JsonNode blog() {
-        return repository.list("blog");
-    }
-
-    @GetMapping("/blog/{id}")
-    public ResponseEntity<?> blogPost(@PathVariable long id) {
-        return find("blog", id);
-    }
-
     @GetMapping("/requests")
     @PreAuthorize("hasAnyAuthority('ROLE_admin', 'ROLE_manager')")
     public JsonNode requests() {
@@ -118,7 +108,7 @@ public class ApiController {
         return users;
     }
 
-    @PostMapping({"/artists", "/portfolio", "/videos", "/blog", "/users"})
+    @PostMapping({"/artists", "/portfolio", "/videos", "/users"})
     @PreAuthorize("hasAuthority('ROLE_admin')")
     public ResponseEntity<?> create(@RequestBody ObjectNode body,
                                     jakarta.servlet.http.HttpServletRequest request) {
@@ -134,6 +124,7 @@ public class ApiController {
     }
 
     @PostMapping("/requests")
+    @Transactional
     public ResponseEntity<?> createRequest(@RequestBody ObjectNode body) {
         for (String required : new String[]{"name", "email", "phone", "style", "bodyPart", "size", "idea"}) {
             if (body.path(required).asText("").isBlank()) {
@@ -142,10 +133,35 @@ public class ApiController {
         }
         body.put("status", "pendiente");
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(repository.create("requests", body));
+            ObjectNode request = repository.create("requests", body);
+            ObjectNode appointment = mapper.createObjectNode();
+            appointment.put("clientName", request.path("name").asText(""));
+            appointment.put("clientEmail", request.path("email").asText(""));
+            appointment.put("clientPhone", request.path("phone").asText(""));
+            appointment.put("artistName", request.path("artist").asText("Sin asignar"));
+            appointment.put("style", request.path("style").asText(""));
+            appointment.putNull("date");
+            appointment.putNull("time");
+            appointment.put("notes", buildNotes(request));
+            appointment.put("requestId", request.path("id").asLong());
+            appointment.put("status", "pendiente");
+            repository.create("appointments", appointment);
+            return ResponseEntity.status(HttpStatus.CREATED).body(request);
         } catch (CollectionRepository.BadRequestException exception) {
             return error(HttpStatus.BAD_REQUEST, exception.getMessage());
         }
+    }
+
+    private static String buildNotes(ObjectNode request) {
+        String idea = request.path("idea").asText("");
+        String observations = request.path("observations").asText("");
+        String bodyPart = request.path("bodyPart").asText("");
+        String size = request.path("size").asText("");
+        StringBuilder notes = new StringBuilder("Solicitud web. Zona: " + bodyPart + " · Tamaño: " + size + ".\nIdea: " + idea);
+        if (!observations.isBlank()) {
+            notes.append("\nObservaciones: ").append(observations);
+        }
+        return notes.toString();
     }
 
     @PostMapping("/appointments")
@@ -169,7 +185,7 @@ public class ApiController {
         }
     }
 
-    @PutMapping({"/artists/{id}", "/portfolio/{id}", "/videos/{id}", "/blog/{id}", "/users/{id}"})
+    @PutMapping({"/artists/{id}", "/portfolio/{id}", "/videos/{id}", "/users/{id}"})
     @PreAuthorize("hasAuthority('ROLE_admin')")
     public ResponseEntity<?> update(@PathVariable long id,
                                     @RequestBody ObjectNode body,
@@ -214,7 +230,7 @@ public class ApiController {
         }
     }
 
-    @DeleteMapping({"/artists/{id}", "/portfolio/{id}", "/videos/{id}", "/blog/{id}", "/users/{id}"})
+    @DeleteMapping({"/artists/{id}", "/portfolio/{id}", "/videos/{id}", "/users/{id}"})
     @PreAuthorize("hasAuthority('ROLE_admin')")
     public ResponseEntity<?> delete(@PathVariable long id,
                                     jakarta.servlet.http.HttpServletRequest request) {
@@ -238,13 +254,6 @@ public class ApiController {
         return repository.delete("appointments", id)
                 ? ResponseEntity.noContent().build()
                 : error(HttpStatus.NOT_FOUND, "Recurso no encontrado.");
-    }
-
-    private ResponseEntity<?> find(String collection, long id) {
-        ObjectNode result = repository.find(collection, id);
-        return result == null
-                ? error(HttpStatus.NOT_FOUND, "Recurso no encontrado.")
-                : ResponseEntity.ok(result);
     }
 
     @ExceptionHandler(CollectionRepository.BadRequestException.class)
